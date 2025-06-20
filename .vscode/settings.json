@@ -108,7 +108,8 @@
     "typeinfo": "cpp",
     "variant": "cpp",
     "bitset": "cpp",
-    "climits": "cpp"
+    "climits": "cpp",
+    "complex": "cpp"
   },
   "C_Cpp.errorSquiggles": "enabled"
 }
