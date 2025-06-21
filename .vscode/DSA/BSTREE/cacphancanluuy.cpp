@@ -192,7 +192,7 @@ int DemNutLa(TNode *p)
     }
     return DemNutLa(p->pLeft) + DemNutLa(p->pRight);
 }
-// Dem nut la le/chan 
+// Dem nut la le/chan
 int DemNutLa(TNode *p)
 {
     int count = 0;
@@ -205,11 +205,11 @@ int DemNutLa(TNode *p)
     {
         return 1;
     }
-    return  DemNutLa(p->pLeft) + DemNutLa(p->pRight);
+    return DemNutLa(p->pLeft) + DemNutLa(p->pRight);
 }
 // Dem nut  1con
 
-//Dem nut 2con thi p->left!=NULL && p->right!=NULL
+// Dem nut 2con thi p->left!=NULL && p->right!=NULL
 int DemNut1Con(TNode *p)
 {
     if (p == NULL)
@@ -221,5 +221,86 @@ int DemNut1Con(TNode *p)
     {
         dem = 1;
     }
-    return dem+DemNut1Con(p->pRight) + DemNut1Con(p->pLeft);
+    return dem + DemNut1Con(p->pRight) + DemNut1Con(p->pLeft);
+}
+
+// Quan he cha con
+bool isFather(Tree t, int cha, int con)
+{
+    TNode *p = t.root;
+    while (p != NULL)
+    {
+        if (p->key == cha)
+        {
+            if ((p->pLeft != NULL && p->pLeft->key == con) || (p->pRight != NULL && p->pRight->key == con))
+            {
+                return true;
+            }
+            return false;
+        }
+        else if (cha < p->key)
+        {
+            p = p->pLeft;
+        }
+        else
+        {
+            p = p->pRight;
+        }
+    }
+    return false;
+}
+void run(int q, Tree T)
+{
+    while (q--)
+    {
+        int a, b;
+        cin >> a >> b;
+        if (isFather(T, a, b))
+        {
+            cout << a << "  la cha cua " << b << endl;
+        }
+        else if (isFather(T, b, a))
+        {
+            cout << b << "  la cha cua " << a << endl;
+        }
+        else
+        {
+            cout << a << " va " << b << " khong co quan he cha con" << endl;
+        }
+    }
+}
+
+// quan he anh em
+bool isBrother(Tree t, int anh, int em)
+{
+    if (anh == em)
+    {
+        return false;
+    }
+    TNode *p = t.root;
+    while (p != NULL)
+    {
+        if (p->pLeft != NULL && p->pRight != NULL)
+        {
+            int left = p->pLeft->key;
+            int right = p->pRight->key;
+            if (left == anh && right == em || left == em && right == anh)
+            {
+                return true;
+            }
+        }
+        if (anh < p->key && em < p->key)
+        {
+            p = p->pLeft;
+        }
+        else if (anh > p->key && em > p->key)
+        {
+            p = p->pRight;
+        }
+        else
+        {
+            break;
+        }
+    }
+    return false;
 }

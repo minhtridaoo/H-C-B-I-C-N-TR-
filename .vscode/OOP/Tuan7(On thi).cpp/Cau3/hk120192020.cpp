@@ -73,7 +73,7 @@ protected:
     string DiaChiThuaDat;
     double DienTich;
     Ngay NgayCap;
-    double DonGiaThue;
+    long long DonGiaThue;
 
 public:
     DatDai() {}
